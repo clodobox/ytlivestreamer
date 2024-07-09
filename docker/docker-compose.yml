@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  ytlivestreamer:
+    build: .
+    volumes:
+      - ./downloads:/app/downloads
+    environment:
+      - CHANNEL_URL=${CHANNEL_URL}
+      - FUTURE=${FUTURE:-true}
+      - ALL=${ALL:-false}
+      - CURRENT_ONLY=${CURRENT_ONLY:-false}
+      - ENCAPSULATION=${ENCAPSULATION:-mkv}
+      - QUALITY=${QUALITY:-bestvideo+bestaudio/best}
+    command: >
+      sh -c "python ytlivestreamer.py $$CHANNEL_URL
+      $${FUTURE:+--future}
+      $${ALL:+--all}
+      $${CURRENT_ONLY:+--current-only}
+      --encapsulation $$ENCAPSULATION
+      --quality \"$$QUALITY\""
