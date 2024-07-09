@@ -3,6 +3,7 @@ version: '3.8'
 services:
   ytlivestreamer:
     build: .
+  # user: "{UID}:{GID}"
     volumes:
       - ./downloads:/app/downloads
     environment:
